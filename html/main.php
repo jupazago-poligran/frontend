@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-
     <title>Menú</title>
 
     <!-- Custom fonts for this template-->
@@ -22,8 +20,28 @@
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
 
 <body id="page-top">
+<?php
+    //Incluir el archivo que contiene las funciones del lenguaje PHP
+    require("../php/funciones.php");
+
+    $usuario     =      $_POST['u'];
+    $clave       =      $_POST['p'];
+
+    $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
+
+    
+    // Notificar todos los errores de PHP
+    error_reporting(-1);
+
+?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -130,12 +148,13 @@
                     <ul class="navbar-nav ml-auto">
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <?php echo " - ".$tipo_de_cuenta ?>
+                                </span>
                                 <img class="img-profile rounded-circle"
                                     src="../img/undraw_profile.svg">
                             </a>
