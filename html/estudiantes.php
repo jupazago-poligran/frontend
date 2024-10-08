@@ -24,6 +24,14 @@
 </head>
 
 <body id="page-top">
+<?php
+    //Incluir el archivo que contiene las funciones del lenguaje PHP
+    require("../php/funciones.php");
+    
+    // Notificar todos los errores de PHP
+    error_reporting(-1);
+
+?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -52,7 +60,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="estudiantes.html">
+                <a class="nav-link" href="estudiantes.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Estudiantes</span></a>
             </li>
@@ -212,42 +220,26 @@
                                                     <th>Sede</th>
                                                 </tr>
                                             </thead>
+                                            <?php
+                                                $estudiantes = traer_alumnos();
+                                                //var_dump($estudiantes); // Verificar el contenido del arreglo
+                                                
+                                                if (!empty($estudiantes)) {
+                                                    foreach ($estudiantes as $estudiante) {
+                                                        echo '<tr>';
+                                                        echo '<td>' . $estudiante['id_estudiante'] . '</td>';
+                                                        echo '<td>' . $estudiante['nombre1'] . ' ' . $estudiante['nombre2'] . '</td>';
+                                                        echo '<td>' . $estudiante['apellido1'] . ' ' . $estudiante['apellido2'] . '</td>';
+                                                        echo '<td>' . $estudiante['grado'] . '</td>';
+                                                        echo '<td>' . $estudiante['sede'] . '</td>';
+                                                        echo '</tr>';
+                                                    }
+                                                } else {
+                                                    echo '<tr><td colspan="5">No se encontraron estudiantes</td></tr>';
+                                                }
+                                            ?>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Juan</td>
-                                                    <td>Pérez</td>
-                                                    <td>5°</td>
-                                                    <td>Sede A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>María</td>
-                                                    <td>Gómez</td>
-                                                    <td>4°</td>
-                                                    <td>Sede B</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Carlos</td>
-                                                    <td>López</td>
-                                                    <td>3°</td>
-                                                    <td>Sede A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Ana</td>
-                                                    <td>Rodríguez</td>
-                                                    <td>2°</td>
-                                                    <td>Sede C</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Pedro</td>
-                                                    <td>Martínez</td>
-                                                    <td>1°</td>
-                                                    <td>Sede B</td>
-                                                </tr>
+
                                             </tbody>
                                         </table>
                                 </div>

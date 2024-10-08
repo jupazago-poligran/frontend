@@ -70,7 +70,7 @@ error_reporting(E_ALL);
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="estudiantes.html">
+                <a class="nav-link" href="estudiantes.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Estudiantes</span></a>
             </li>

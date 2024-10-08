@@ -60,5 +60,41 @@ function iniciar_sesion($usuario, $clave){
     }
     return $user;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function traer_alumnos(){
+    existencia_de_la_conexion(); 
+    require_once("conexion.php");
+
+    $conexion = conectar();                     //Obtenemos la conexion
+
+    // Consulta a la base de datos en la tabla estudiantes
+    $sql = "SELECT `id_estudiante`, `apellido1`, `apellido2`, `nombre1`, `nombre2`, `grado`, `sede` FROM `estudiantes` ORDER BY `id_estudiante` ASC";
+    $resultado = $conexion->query($sql);
+
+    $resultado = $conexion->query($sql);
+    //var_dump($resultado); // Verificar el resultado de la consulta
+
+    if ($resultado === false) {
+        //echo "Error en la consulta SQL: " . $conexion->error;
+    } else {
+        //echo "Consulta SQL exitosa.";
+    }
+
+    $estudiantes = array();
+
+    if ($resultado->num_rows > 0) {
+        // Almacenar cada fila en un arreglo
+        while($fila = $resultado->fetch_assoc()) {
+            $estudiantes[] = $fila; // Cada fila es un arreglo asociativo con la información del estudiante
+        }
+    }
+
+    // Cerrar la conexión
+    $conexion->close();
+
+    return $estudiantes; // Devolvemos el arreglo de estudiantes
+}
+
 
 ?>
